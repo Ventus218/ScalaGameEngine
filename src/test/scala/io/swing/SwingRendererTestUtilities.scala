@@ -4,7 +4,7 @@ import SwingRenderers.*
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers.*
 
-import java.awt.Color
+import java.awt.{Color, Font}
 import Dimensions2D.Positionable
 
 object SwingRendererTestUtilities:
@@ -66,6 +66,16 @@ object SwingRendererTestUtilities:
     new Behaviour
       with SwingImageRenderer(imagePath, width, height, offset)
       with Positionable(position._1, position._2)
+
+  def textRenderer(
+      text: String,
+      size: Int,
+      color: Color,
+      offset: (Int, Int) = (0, 0),
+      anchor: UIAnchor = UIAnchor.Center
+  ): SwingTextRenderer = 
+    new Behaviour
+      with SwingTextRenderer(text, Font("Arial", Font.PLAIN, size), color, textAnchor = anchor, textOffset = offset)
 
   /* test for shape renderable */
   def testShapeProperties(renderer: SwingShapeRenderer): Unit =
